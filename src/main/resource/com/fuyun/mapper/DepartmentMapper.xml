@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuyun.mapper.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.fuyun.bean.Department" >
+    <id column="DptCode" property="dptcode" jdbcType="CHAR" />
+    <result column="DptClassFlag" property="dptclassflag" jdbcType="CHAR" />
+    <result column="BelongDptCode" property="belongdptcode" jdbcType="CHAR" />
+    <result column="DptName" property="dptname" jdbcType="VARCHAR" />
+    <result column="DptProfileOperator" property="dptprofileoperator" jdbcType="VARCHAR" />
+    <result column="DptProfileOperatorPhone" property="dptprofileoperatorphone" jdbcType="VARCHAR" />
+    <result column="DptCommAddress" property="dptcommaddress" jdbcType="VARCHAR" />
+    <result column="DptZipCode" property="dptzipcode" jdbcType="VARCHAR" />
+    <result column="DptMemo" property="dptmemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DptCode, DptClassFlag, BelongDptCode, DptName, DptProfileOperator, DptProfileOperatorPhone, 
+    DptCommAddress, DptZipCode, DptMemo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Department
+    where DptCode = #{dptcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Department
+    where DptCode = #{dptcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuyun.bean.Department" >
+    insert into Department (DptCode, DptClassFlag, BelongDptCode, 
+      DptName, DptProfileOperator, DptProfileOperatorPhone, 
+      DptCommAddress, DptZipCode, DptMemo
+      )
+    values (#{dptcode,jdbcType=CHAR}, #{dptclassflag,jdbcType=CHAR}, #{belongdptcode,jdbcType=CHAR}, 
+      #{dptname,jdbcType=VARCHAR}, #{dptprofileoperator,jdbcType=VARCHAR}, #{dptprofileoperatorphone,jdbcType=VARCHAR}, 
+      #{dptcommaddress,jdbcType=VARCHAR}, #{dptzipcode,jdbcType=VARCHAR}, #{dptmemo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuyun.bean.Department" >
+    insert into Department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dptcode != null" >
+        DptCode,
+      </if>
+      <if test="dptclassflag != null" >
+        DptClassFlag,
+      </if>
+      <if test="belongdptcode != null" >
+        BelongDptCode,
+      </if>
+      <if test="dptname != null" >
+        DptName,
+      </if>
+      <if test="dptprofileoperator != null" >
+        DptProfileOperator,
+      </if>
+      <if test="dptprofileoperatorphone != null" >
+        DptProfileOperatorPhone,
+      </if>
+      <if test="dptcommaddress != null" >
+        DptCommAddress,
+      </if>
+      <if test="dptzipcode != null" >
+        DptZipCode,
+      </if>
+      <if test="dptmemo != null" >
+        DptMemo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dptcode != null" >
+        #{dptcode,jdbcType=CHAR},
+      </if>
+      <if test="dptclassflag != null" >
+        #{dptclassflag,jdbcType=CHAR},
+      </if>
+      <if test="belongdptcode != null" >
+        #{belongdptcode,jdbcType=CHAR},
+      </if>
+      <if test="dptname != null" >
+        #{dptname,jdbcType=VARCHAR},
+      </if>
+      <if test="dptprofileoperator != null" >
+        #{dptprofileoperator,jdbcType=VARCHAR},
+      </if>
+      <if test="dptprofileoperatorphone != null" >
+        #{dptprofileoperatorphone,jdbcType=VARCHAR},
+      </if>
+      <if test="dptcommaddress != null" >
+        #{dptcommaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dptzipcode != null" >
+        #{dptzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dptmemo != null" >
+        #{dptmemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuyun.bean.Department" >
+    update Department
+    <set >
+      <if test="dptclassflag != null" >
+        DptClassFlag = #{dptclassflag,jdbcType=CHAR},
+      </if>
+      <if test="belongdptcode != null" >
+        BelongDptCode = #{belongdptcode,jdbcType=CHAR},
+      </if>
+      <if test="dptname != null" >
+        DptName = #{dptname,jdbcType=VARCHAR},
+      </if>
+      <if test="dptprofileoperator != null" >
+        DptProfileOperator = #{dptprofileoperator,jdbcType=VARCHAR},
+      </if>
+      <if test="dptprofileoperatorphone != null" >
+        DptProfileOperatorPhone = #{dptprofileoperatorphone,jdbcType=VARCHAR},
+      </if>
+      <if test="dptcommaddress != null" >
+        DptCommAddress = #{dptcommaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dptzipcode != null" >
+        DptZipCode = #{dptzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dptmemo != null" >
+        DptMemo = #{dptmemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DptCode = #{dptcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuyun.bean.Department" >
+    update Department
+    set DptClassFlag = #{dptclassflag,jdbcType=CHAR},
+      BelongDptCode = #{belongdptcode,jdbcType=CHAR},
+      DptName = #{dptname,jdbcType=VARCHAR},
+      DptProfileOperator = #{dptprofileoperator,jdbcType=VARCHAR},
+      DptProfileOperatorPhone = #{dptprofileoperatorphone,jdbcType=VARCHAR},
+      DptCommAddress = #{dptcommaddress,jdbcType=VARCHAR},
+      DptZipCode = #{dptzipcode,jdbcType=VARCHAR},
+      DptMemo = #{dptmemo,jdbcType=VARCHAR}
+    where DptCode = #{dptcode,jdbcType=CHAR}
+  </update>
+</mapper>

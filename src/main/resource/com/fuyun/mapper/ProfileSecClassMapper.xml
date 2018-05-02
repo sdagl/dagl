@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuyun.mapper.ProfileSecClassMapper" >
+  <resultMap id="BaseResultMap" type="com.fuyun.bean.ProfileSecClass" >
+    <id column="SecClassCode" property="secclasscode" jdbcType="TINYINT" />
+    <result column="SecClassName" property="secclassname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SecClassCode, SecClassName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Byte" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProfileSecClass
+    where SecClassCode = #{secclasscode,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte" >
+    delete from ProfileSecClass
+    where SecClassCode = #{secclasscode,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuyun.bean.ProfileSecClass" >
+    insert into ProfileSecClass (SecClassCode, SecClassName)
+    values (#{secclasscode,jdbcType=TINYINT}, #{secclassname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuyun.bean.ProfileSecClass" >
+    insert into ProfileSecClass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="secclasscode != null" >
+        SecClassCode,
+      </if>
+      <if test="secclassname != null" >
+        SecClassName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="secclasscode != null" >
+        #{secclasscode,jdbcType=TINYINT},
+      </if>
+      <if test="secclassname != null" >
+        #{secclassname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuyun.bean.ProfileSecClass" >
+    update ProfileSecClass
+    <set >
+      <if test="secclassname != null" >
+        SecClassName = #{secclassname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SecClassCode = #{secclasscode,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuyun.bean.ProfileSecClass" >
+    update ProfileSecClass
+    set SecClassName = #{secclassname,jdbcType=VARCHAR}
+    where SecClassCode = #{secclasscode,jdbcType=TINYINT}
+  </update>
+</mapper>

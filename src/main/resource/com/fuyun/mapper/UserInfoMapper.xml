@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuyun.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fuyun.bean.UserInfo" >
+    <id column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="PasswordChangedFlag" property="passwordchangedflag" jdbcType="BIT" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="DptCode" property="dptcode" jdbcType="CHAR" />
+    <result column="OperatePowerType" property="operatepowertype" jdbcType="TINYINT" />
+    <result column="Status" property="status" jdbcType="BIT" />
+    <result column="UserIdCode" property="useridcode" jdbcType="CHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UserID, Password, PasswordChangedFlag, UserName, DptCode, OperatePowerType, Status, 
+    UserIdCode, CreateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserInfo
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from UserInfo
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuyun.bean.UserInfo" >
+    insert into UserInfo (UserID, Password, PasswordChangedFlag, 
+      UserName, DptCode, OperatePowerType, 
+      Status, UserIdCode, CreateTime
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{passwordchangedflag,jdbcType=BIT}, 
+      #{username,jdbcType=VARCHAR}, #{dptcode,jdbcType=CHAR}, #{operatepowertype,jdbcType=TINYINT}, 
+      #{status,jdbcType=BIT}, #{useridcode,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuyun.bean.UserInfo" >
+    insert into UserInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="passwordchangedflag != null" >
+        PasswordChangedFlag,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="dptcode != null" >
+        DptCode,
+      </if>
+      <if test="operatepowertype != null" >
+        OperatePowerType,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="useridcode != null" >
+        UserIdCode,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordchangedflag != null" >
+        #{passwordchangedflag,jdbcType=BIT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="dptcode != null" >
+        #{dptcode,jdbcType=CHAR},
+      </if>
+      <if test="operatepowertype != null" >
+        #{operatepowertype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="useridcode != null" >
+        #{useridcode,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuyun.bean.UserInfo" >
+    update UserInfo
+    <set >
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordchangedflag != null" >
+        PasswordChangedFlag = #{passwordchangedflag,jdbcType=BIT},
+      </if>
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="dptcode != null" >
+        DptCode = #{dptcode,jdbcType=CHAR},
+      </if>
+      <if test="operatepowertype != null" >
+        OperatePowerType = #{operatepowertype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=BIT},
+      </if>
+      <if test="useridcode != null" >
+        UserIdCode = #{useridcode,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuyun.bean.UserInfo" >
+    update UserInfo
+    set Password = #{password,jdbcType=VARCHAR},
+      PasswordChangedFlag = #{passwordchangedflag,jdbcType=BIT},
+      UserName = #{username,jdbcType=VARCHAR},
+      DptCode = #{dptcode,jdbcType=CHAR},
+      OperatePowerType = #{operatepowertype,jdbcType=TINYINT},
+      Status = #{status,jdbcType=BIT},
+      UserIdCode = #{useridcode,jdbcType=CHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP}
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="UserInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserInfo
+    where username = #{username} and password =#{password}
+  </select>
+</mapper>

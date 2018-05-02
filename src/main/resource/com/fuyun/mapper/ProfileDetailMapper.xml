@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuyun.mapper.ProfileDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.fuyun.bean.ProfileDetail" >
+    <id column="ProfileMainInfCode" property="profilemaininfcode" jdbcType="CHAR" />
+    <id column="DetailSequence" property="detailsequence" jdbcType="SMALLINT" />
+    <result column="DetailTitle" property="detailtitle" jdbcType="VARCHAR" />
+    <result column="SecClassCode" property="secclasscode" jdbcType="TINYINT" />
+    <result column="Author" property="author" jdbcType="VARCHAR" />
+    <result column="OutcomeDate" property="outcomedate" jdbcType="TIMESTAMP" />
+    <result column="FileNumber" property="filenumber" jdbcType="VARCHAR" />
+    <result column="FileDir" property="filedir" jdbcType="VARCHAR" />
+    <result column="DownloadNumber" property="downloadnumber" jdbcType="INTEGER" />
+    <result column="Memo" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProfileMainInfCode, DetailSequence, DetailTitle, SecClassCode, Author, OutcomeDate, 
+    FileNumber, FileDir, DownloadNumber, Memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.fuyun.bean.ProfileDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProfileDetail
+    where ProfileMainInfCode = #{profilemaininfcode,jdbcType=CHAR}
+      and DetailSequence = #{detailsequence,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fuyun.bean.ProfileDetailKey" >
+    delete from ProfileDetail
+    where ProfileMainInfCode = #{profilemaininfcode,jdbcType=CHAR}
+      and DetailSequence = #{detailsequence,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuyun.bean.ProfileDetail" >
+    insert into ProfileDetail (ProfileMainInfCode, DetailSequence, 
+      DetailTitle, SecClassCode, Author, 
+      OutcomeDate, FileNumber, FileDir, 
+      DownloadNumber, Memo)
+    values (#{profilemaininfcode,jdbcType=CHAR}, #{detailsequence,jdbcType=SMALLINT}, 
+      #{detailtitle,jdbcType=VARCHAR}, #{secclasscode,jdbcType=TINYINT}, #{author,jdbcType=VARCHAR}, 
+      #{outcomedate,jdbcType=TIMESTAMP}, #{filenumber,jdbcType=VARCHAR}, #{filedir,jdbcType=VARCHAR}, 
+      #{downloadnumber,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuyun.bean.ProfileDetail" >
+    insert into ProfileDetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="profilemaininfcode != null" >
+        ProfileMainInfCode,
+      </if>
+      <if test="detailsequence != null" >
+        DetailSequence,
+      </if>
+      <if test="detailtitle != null" >
+        DetailTitle,
+      </if>
+      <if test="secclasscode != null" >
+        SecClassCode,
+      </if>
+      <if test="author != null" >
+        Author,
+      </if>
+      <if test="outcomedate != null" >
+        OutcomeDate,
+      </if>
+      <if test="filenumber != null" >
+        FileNumber,
+      </if>
+      <if test="filedir != null" >
+        FileDir,
+      </if>
+      <if test="downloadnumber != null" >
+        DownloadNumber,
+      </if>
+      <if test="memo != null" >
+        Memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="profilemaininfcode != null" >
+        #{profilemaininfcode,jdbcType=CHAR},
+      </if>
+      <if test="detailsequence != null" >
+        #{detailsequence,jdbcType=SMALLINT},
+      </if>
+      <if test="detailtitle != null" >
+        #{detailtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secclasscode != null" >
+        #{secclasscode,jdbcType=TINYINT},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomedate != null" >
+        #{outcomedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filenumber != null" >
+        #{filenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="filedir != null" >
+        #{filedir,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadnumber != null" >
+        #{downloadnumber,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuyun.bean.ProfileDetail" >
+    update ProfileDetail
+    <set >
+      <if test="detailtitle != null" >
+        DetailTitle = #{detailtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secclasscode != null" >
+        SecClassCode = #{secclasscode,jdbcType=TINYINT},
+      </if>
+      <if test="author != null" >
+        Author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="outcomedate != null" >
+        OutcomeDate = #{outcomedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filenumber != null" >
+        FileNumber = #{filenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="filedir != null" >
+        FileDir = #{filedir,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadnumber != null" >
+        DownloadNumber = #{downloadnumber,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ProfileMainInfCode = #{profilemaininfcode,jdbcType=CHAR}
+      and DetailSequence = #{detailsequence,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuyun.bean.ProfileDetail" >
+    update ProfileDetail
+    set DetailTitle = #{detailtitle,jdbcType=VARCHAR},
+      SecClassCode = #{secclasscode,jdbcType=TINYINT},
+      Author = #{author,jdbcType=VARCHAR},
+      OutcomeDate = #{outcomedate,jdbcType=TIMESTAMP},
+      FileNumber = #{filenumber,jdbcType=VARCHAR},
+      FileDir = #{filedir,jdbcType=VARCHAR},
+      DownloadNumber = #{downloadnumber,jdbcType=INTEGER},
+      Memo = #{memo,jdbcType=VARCHAR}
+    where ProfileMainInfCode = #{profilemaininfcode,jdbcType=CHAR}
+      and DetailSequence = #{detailsequence,jdbcType=SMALLINT}
+  </update>
+</mapper>

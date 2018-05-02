@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuyun.mapper.ProfileClassMapper" >
+  <resultMap id="BaseResultMap" type="com.fuyun.bean.ProfileClass" >
+    <id column="ProfileClassCode" property="profileclasscode" jdbcType="CHAR" />
+    <result column="ProfileClassName" property="profileclassname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProfileClassCode, ProfileClassName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProfileClass
+    where ProfileClassCode = #{profileclasscode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ProfileClass
+    where ProfileClassCode = #{profileclasscode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuyun.bean.ProfileClass" >
+    insert into ProfileClass (ProfileClassCode, ProfileClassName)
+    values (#{profileclasscode,jdbcType=CHAR}, #{profileclassname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuyun.bean.ProfileClass" >
+    insert into ProfileClass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="profileclasscode != null" >
+        ProfileClassCode,
+      </if>
+      <if test="profileclassname != null" >
+        ProfileClassName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="profileclasscode != null" >
+        #{profileclasscode,jdbcType=CHAR},
+      </if>
+      <if test="profileclassname != null" >
+        #{profileclassname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuyun.bean.ProfileClass" >
+    update ProfileClass
+    <set >
+      <if test="profileclassname != null" >
+        ProfileClassName = #{profileclassname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ProfileClassCode = #{profileclasscode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuyun.bean.ProfileClass" >
+    update ProfileClass
+    set ProfileClassName = #{profileclassname,jdbcType=VARCHAR}
+    where ProfileClassCode = #{profileclasscode,jdbcType=CHAR}
+  </update>
+</mapper>
